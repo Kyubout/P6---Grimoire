@@ -12,4 +12,6 @@
 
 Le code de la partie front-end se trouve [ici](https://github.com/OpenClassrooms-Student-Center/P7-Dev-Web-livres) 
 
+## Démarrage
+
 Faire la commande `npm install` puis `npm start` dans le dossier frontend pour installer les dépendances et lancer l'application. Faire de même dans le dossier backend. 
