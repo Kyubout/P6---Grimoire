@@ -9,6 +9,7 @@
 - Gérer le téléchargement et l'optimisation des images.
 - Respecter les bonnes pratiques du Green Code.
 
+
 Le code de la partie front-end se trouve [ici](https://github.com/OpenClassrooms-Student-Center/P7-Dev-Web-livres) 
 
-Faire la commande `npm install` puis `npm start` pour lancer le projet. 
+Faire la commande `npm install` puis `npm start` pour lancer le front. 
