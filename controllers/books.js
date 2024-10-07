@@ -37,7 +37,7 @@ exports.modifyBook = (req, res, next) => {
         req.file && fs.unlink(`images/${filename}`,
           (err) => {
             if (err) console.log(err);
-            else { console.log("Fichier supprimé") }
+            else { console.log("Ancienne image supprimée !") }
           });
 
         Book.updateOne({ _id: req.params.id }, { ...bookObject, _id: req.params.id })

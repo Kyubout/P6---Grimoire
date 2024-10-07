@@ -12,10 +12,8 @@ const storage = multer.diskStorage({
 
   filename: (req, file, callback) => {
     const name = file.originalname.split(" ").join("_");
-    callback(null, name + Date.now() + ".webp");
+    callback(null, name + Date.now());
   }
 });
-
-
 
 module.exports = multer({ storage: storage }).single("image");
