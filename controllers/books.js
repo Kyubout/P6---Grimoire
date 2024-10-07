@@ -101,7 +101,7 @@ exports.createRating = (req, res, next) => {
         book.averageRating = parseFloat(newAverageRating.toFixed(1));
 
         book.save()
-          .then(() => res.status(201).json({ message: "Objet enregistré !" }))
+          .then((book) => res.status(201).json(book))
           .catch(error => res.status(400).json({ error }));
       };
     })
