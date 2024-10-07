@@ -82,9 +82,36 @@ exports.getAllBooks = (req, res, next) => {
 };
 
 exports.createRating = (req, res, next) => {
+  const addedRating = {
+    userId: req.auth.userId,
+    grade: req.body.rating
+  };
 
+  if (addedRating.grade < 0 || addedRating > 5) {
+    return res.status(400).json({ message: "La note doit être comprise entre 0 et 5" });
+  }
+
+  Book.findOne({ _id: req.params.id })
+    .then((book) => {
+      if (book.ratings.find(rating => rating.userId === req.auth.userId)) {
+        return res.status(400).json({ message: "Vous avez déjà noté ce livre" })
+      } else {
+        book.ratings.push(addedRating);
+        const newAverageRating = (book.averageRating * (book.ratings.length - 1) + addedRating.grade) / book.ratings.length;
+        book.averageRating = parseFloat(newAverageRating.toFixed(1));
+
+        book.save()
+          .then(() => res.status(201).json({ message: "Objet enregistré !" }))
+          .catch(error => res.status(400).json({ error }));
+      };
+    })
+    .catch((error) => res.status(404).json({ error }));
 };
 
 exports.getBestRatings = (req, res, next) => {
-
+  Book.find()
+    .sort({ averageRating: -1 }) //ordre décroissant
+    .limit(3) //les 3 premiers de la liste
+    .then((books) => res.status(200).json(books))
+    .catch((error) => res.status(404).json({ error }));
 };
